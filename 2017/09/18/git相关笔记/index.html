@@ -38,7 +38,7 @@
 
 
 
-<link rel="canonical" href="http://yoursite.com/"/>
+<link rel="canonical" href="http://yoursite.com/2017/09/18/git相关笔记/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
@@ -77,7 +77,7 @@
 
 
 
-    <title> Code Note </title>
+    <title>  - Code Note </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -152,14 +152,12 @@
         <div class="content-wrapper">
           <div id="content" class="content">
             
-  <section id="posts" class="posts">
-    
-      
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2017/09/18/git相关笔记/"></a>
+          
         
       </h1>
 
@@ -174,14 +172,17 @@
 
     
     
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#git相关笔记"><span class="toc-text">git相关笔记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始配置"><span class="toc-text">初始配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建仓库"><span class="toc-text">创建仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#先本地后远程"><span class="toc-text">先本地后远程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#先远程后本地"><span class="toc-text">先远程后本地</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码的提交"><span class="toc-text">代码的提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看历史和状态"><span class="toc-text">查看历史和状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-reset"><span class="toc-text">关于git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-revert"><span class="toc-text">关于git revert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-checkout"><span class="toc-text">关于git checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-stash"><span class="toc-text">关于git stash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支操作"><span class="toc-text">分支操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于标签"><span class="toc-text">关于标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见问题及解决方法"><span class="toc-text">常见问题及解决方法</span></a></li></ol>
+    </div>
+  </div>
+
 
     <div class="post-content">
       
-        
-        
-
-        
-          <h3 id="git相关笔记"><a href="#git相关笔记" class="headerlink" title="git相关笔记"></a>git相关笔记</h3><h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><ul>
+        <h3 id="git相关笔记"><a href="#git相关笔记" class="headerlink" title="git相关笔记"></a>git相关笔记</h3><h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><ul>
 <li><code>git config --global user.name &quot;Your Name&quot;</code>，<code>git config --global user.email &quot;email@example.com&quot;</code>用来配置用户名和邮箱，一般在第一次操作时会提醒配置。</li>
 <li><code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</code>执行后默认会在<code>C:\Users\Administrator\.ssh</code>下生成几个文件，只要将其中的<code>id_rsa.pub</code>中的内容复制<br>到（gitlab，github）对应配置ssh的地方保存后就可对有权限的仓库进行代码的push操作。</li>
 <li>在用ssh类型的地址(例如:<code>git@114.55.92.162:chendebo/gitNote.git</code>)项目时，ssh密钥起作用则在push，pull等操作时就不要再次输入密码。</li>
@@ -272,93 +273,47 @@
 <p>说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream branch-name remote-name/branch-name</code>例如<code>git branch --set-upstream dev origin/dev</code></p>
 </blockquote>
 
-        
       
     </div>
 
     
-
-    
-
-  </article>
-
-    
       
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/09/18/hello-world/">本博客的搭建过程</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017-09-18
-        </span>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
       
-        
-        
 
-        
-          <p>本博客是通过github+hexo+even来快速自动化生成的</p>
-<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><h3 id="在github上新建一个仓库"><a href="#在github上新建一个仓库" class="headerlink" title="在github上新建一个仓库"></a>在github上新建一个仓库</h3><blockquote>
-<p>仓库名字格式为：<em>username.github.io</em><br>其中username和你的github名字保持一致</p>
-</blockquote>
-<p><img src="/img/hello-word/0.png" alt="Alt text"></p>
-<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cnpm install -g hexo</div></pre></td></tr></table></figure>
-<h3 id="初始化博客工程"><a href="#初始化博客工程" class="headerlink" title="初始化博客工程"></a>初始化博客工程</h3><blockquote>
-<p>新建一个文件夹（test），在文件夹下执行</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init</div></pre></td></tr></table></figure>
-<h3 id="在本地预览"><a href="#在本地预览" class="headerlink" title="在本地预览"></a>在本地预览</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo s</div></pre></td></tr></table></figure>
-<blockquote>
-<p><code>hexo g</code> 根据配置文件和静态资源生成静态页面<br><code>hexo s</code> 在本地预览该项目</p>
-</blockquote>
-<h3 id="将该项目与github仓库关联"><a href="#将该项目与github仓库关联" class="headerlink" title="将该项目与github仓库关联"></a>将该项目与github仓库关联</h3><blockquote>
-<p>修改项目根目录下的_config.yml中的对应配置项，如图<br>要注意的是配置项的冒号后面都会有个空格！<br><img src="/img/hello-word/2.png" alt="Alt text"></p>
-</blockquote>
-<h3 id="将项目发布到github上"><a href="#将项目发布到github上" class="headerlink" title="将项目发布到github上"></a>将项目发布到github上</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo d</div></pre></td></tr></table></figure>
-<p>在<code>hexo g</code>后可以通过该命令将项目打包后的文件push到github上<br>此时你就可以通过<em><a href="https://username.github.io" target="_blank" rel="external">https://username.github.io</a>.</em> 来访问你的线上博客了。</p>
-<h3 id="添加你的博客文章"><a href="#添加你的博客文章" class="headerlink" title="添加你的博客文章"></a>添加你的博客文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">'blogname'</span></div></pre></td></tr></table></figure>
-<p>通过以上命令可以直接生成md文件，在里面书写你的博客内容。然后<code>hexo g</code>,<code>hexo d</code>来推送到github上。在本地书写时，可以<code>hexo s</code>来预览效果。</p>
-<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>在<a href="https://hexo.io/themes/" target="_blank" rel="external">hexo theme</a>里预览主题，挑选喜欢的主题后，进入对应的github仓库，里面都会有详细的使用说明<br>这里以<strong>even</strong>为例，<br>下载主题资源,text目录下执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cnpm install hexo-renderer-scss --save</div><div class="line">$ git <span class="built_in">clone</span> https://github.com/ahonn/hexo-theme-even themes/even</div></pre></td></tr></table></figure></p>
-<p>将根目录下的theme配置项设置为even</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo g</div><div class="line">$ hexo d</div></pre></td></tr></table></figure>
-<p>具体的主题配置参考个主题仓库的说明文档。</p>
-<pre><code>以上的g,d,s等都是hexo的命令缩写，具体可以同hexo --help来查看具体内容。
-</code></pre>
-        
+
+
       
-    </div>
-
+      
     
 
     
-
-  </article>
-
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
     
+      <a class="next" href="/2017/09/18/hello-world/">
+        <span class="next-text nav-default">本博客的搭建过程</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
+
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
@@ -435,6 +390,8 @@
     </div>
 
     
+  
+
 
 
     
