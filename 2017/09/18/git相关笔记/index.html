@@ -17,6 +17,8 @@
 
 
 
+  <meta name="description" content="git相关笔记"/>
+
 
 
 
@@ -77,7 +79,7 @@
 
 
 
-    <title>  - Code Note </title>
+    <title> git相关笔记 - Code Note </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -157,7 +159,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          
+          git相关笔记
         
       </h1>
 
@@ -175,14 +177,15 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#git相关笔记"><span class="toc-text">git相关笔记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#初始配置"><span class="toc-text">初始配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建仓库"><span class="toc-text">创建仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#先本地后远程"><span class="toc-text">先本地后远程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#先远程后本地"><span class="toc-text">先远程后本地</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码的提交"><span class="toc-text">代码的提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看历史和状态"><span class="toc-text">查看历史和状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-reset"><span class="toc-text">关于git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-revert"><span class="toc-text">关于git revert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-checkout"><span class="toc-text">关于git checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-stash"><span class="toc-text">关于git stash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支操作"><span class="toc-text">分支操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于标签"><span class="toc-text">关于标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见问题及解决方法"><span class="toc-text">常见问题及解决方法</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#初始配置"><span class="toc-text">初始配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建仓库"><span class="toc-text">创建仓库</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#先本地后远程"><span class="toc-text">先本地后远程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#先远程后本地"><span class="toc-text">先远程后本地</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码的提交"><span class="toc-text">代码的提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查看历史和状态"><span class="toc-text">查看历史和状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-reset"><span class="toc-text">关于git reset</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-revert"><span class="toc-text">关于git revert</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-checkout"><span class="toc-text">关于git checkout</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于git-stash"><span class="toc-text">关于git stash</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支操作"><span class="toc-text">分支操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于标签"><span class="toc-text">关于标签</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见问题及解决方法"><span class="toc-text">常见问题及解决方法</span></a></li></ol>
     </div>
   </div>
 
 
     <div class="post-content">
       
-        <h3 id="git相关笔记"><a href="#git相关笔记" class="headerlink" title="git相关笔记"></a>git相关笔记</h3><h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><ul>
+        <p>收集git的常用命令，和容易遇到的问题和解决办法</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><ul>
 <li><code>git config --global user.name &quot;Your Name&quot;</code>，<code>git config --global user.email &quot;email@example.com&quot;</code>用来配置用户名和邮箱，一般在第一次操作时会提醒配置。</li>
 <li><code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</code>执行后默认会在<code>C:\Users\Administrator\.ssh</code>下生成几个文件，只要将其中的<code>id_rsa.pub</code>中的内容复制<br>到（gitlab，github）对应配置ssh的地方保存后就可对有权限的仓库进行代码的push操作。</li>
 <li>在用ssh类型的地址(例如:<code>git@114.55.92.162:chendebo/gitNote.git</code>)项目时，ssh密钥起作用则在push，pull等操作时就不要再次输入密码。</li>
