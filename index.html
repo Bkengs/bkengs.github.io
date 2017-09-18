@@ -159,7 +159,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2017/09/18/test/">test</a>
+          <a class="post-link" href="/2017/09/18/hello-world/">本博客的搭建过程</a>
         
       </h1>
 
@@ -181,55 +181,33 @@
         
 
         
-          
-        
-      
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
-      
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/09/18/hello-world/">Hello World</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017-09-18
-        </span>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
+          <p>本博客是通过github+hexo+even来快速自动化生成的</p>
+<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><h3 id="在github上新建一个仓库"><a href="#在github上新建一个仓库" class="headerlink" title="在github上新建一个仓库"></a>在github上新建一个仓库</h3><blockquote>
+<p>仓库名字格式为：<em>username.github.io</em><br>其中username和你的github名字保持一致</p>
+</blockquote>
+<p><img src="/img/hello-word/0.png" alt="Alt text"></p>
+<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cnpm install -g hexo</div></pre></td></tr></table></figure>
+<h3 id="初始化博客工程"><a href="#初始化博客工程" class="headerlink" title="初始化博客工程"></a>初始化博客工程</h3><blockquote>
+<p>新建一个文件夹（test），在文件夹下执行</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init</div></pre></td></tr></table></figure>
+<h3 id="在本地预览"><a href="#在本地预览" class="headerlink" title="在本地预览"></a>在本地预览</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo s</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>hexo g</code> 根据配置文件和静态资源生成静态页面<br><code>hexo s</code> 在本地预览该项目</p>
+</blockquote>
+<h3 id="将该项目与github仓库关联"><a href="#将该项目与github仓库关联" class="headerlink" title="将该项目与github仓库关联"></a>将该项目与github仓库关联</h3><blockquote>
+<p>修改项目根目录下的_config.yml中的对应配置项，如图<br>要注意的是配置项的冒号后面都会有个空格！<br><img src="/img/hello-word/2.png" alt="Alt text"></p>
+</blockquote>
+<h3 id="将项目发布到github上"><a href="#将项目发布到github上" class="headerlink" title="将项目发布到github上"></a>将项目发布到github上</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo d</div></pre></td></tr></table></figure>
+<p>在<code>hexo g</code>后可以通过该命令将项目打包后的文件push到github上<br>此时你就可以通过<em><a href="https://username.github.io" target="_blank" rel="external">https://username.github.io</a>.</em> 来访问你的线上博客了。</p>
+<h3 id="添加你的博客文章"><a href="#添加你的博客文章" class="headerlink" title="添加你的博客文章"></a>添加你的博客文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">'blogname'</span></div></pre></td></tr></table></figure>
+<p>通过以上命令可以直接生成md文件，在里面书写你的博客内容。然后<code>hexo g</code>,<code>hexo d</code>来推送到github上。在本地书写时，可以<code>hexo s</code>来预览效果。</p>
+<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>在<a href="https://hexo.io/themes/" target="_blank" rel="external">hexo theme</a>里预览主题，挑选喜欢的主题后，进入对应的github仓库，里面都会有详细的使用说明<br>这里以<strong>even</strong>为例，<br>下载主题资源,text目录下执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cnpm install hexo-renderer-scss --save</div><div class="line">$ git <span class="built_in">clone</span> https://github.com/ahonn/hexo-theme-even themes/even</div></pre></td></tr></table></figure></p>
+<p>将根目录下的theme配置项设置为even</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo g</div><div class="line">$ hexo d</div></pre></td></tr></table></figure>
+<p>具体的主题配置参考个主题仓库的说明文档。</p>
+<pre><code>以上的g,d,s等都是hexo的命令缩写，具体可以同hexo --help来查看具体内容。
+</code></pre>
         
       
     </div>
