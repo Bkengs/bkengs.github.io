@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="zh-cn">
   <head>
     
 <meta charset="UTF-8"/>
@@ -31,7 +31,7 @@
 
 
 
-  <link rel="alternate" href="/default" title="Hexo">
+  <link rel="alternate" href="/atom.xml" title="Code Note">
 
 
 
@@ -46,6 +46,8 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
 
 
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
@@ -73,16 +75,24 @@
 
 
 
+  <script src="//cdn1.lncld.net/static/js/3.1.1/av-min.js"></script>
+  <script id="leancloud">
+    AV.init({
+      appId: "uX33C6evhF9WRcY9PGWVYcBt-gzGzoHsz",
+      appKey: "zaIM6lDK0OiXbEMPPxUn4Sza"
+    });
+  </script>
 
 
 
 
-    <title> Hello World - Hexo </title>
+
+    <title> Hello World - Code Note </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
   <div class="mobile-header-logo">
-    <a href="/." class="logo">Hexo</a>
+    <a href="/." class="logo">Code Note</a>
   </div>
   <div class="mobile-navbar-icon">
     <span></span>
@@ -117,7 +127,7 @@
 
     <div class="container" id="mobile-panel">
       <header id="header" class="header"><div class="logo-wrapper">
-  <a href="/." class="logo">Hexo</a>
+  <a href="/." class="logo">Code Note</a>
 </div>
 
 <nav class="site-navbar">
@@ -167,6 +177,12 @@
         </span>
         
         
+        <div class="post-visits"
+             data-url="/2017/09/18/hello-world/"
+             data-title="Hello World">
+            阅读次数
+          </div>
+        
       </div>
     </header>
 
@@ -202,7 +218,7 @@
   <div class="post-copyright">
     <p class="copyright-item">
       <span>原文作者: </span>
-      <a href="http://yoursite.com">John Doe</a>
+      <a href="http://yoursite.com">chendebo</a>
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
@@ -227,6 +243,12 @@
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/18/test/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">test</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
     
   </nav>
@@ -253,7 +275,7 @@
     
       
         
-          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+          <a href="mailto:chendebofrontend@gmail.com" class="iconfont icon-email" title="email"></a>
         
       
     
@@ -283,9 +305,6 @@
     
     
     
-      
-      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
-    
   </div>
 
 
@@ -310,7 +329,7 @@
     <span class="heart">
       <i class="iconfont icon-heart"></i>
     </span>
-    <span class="author">John Doe</span>
+    <span class="author">chendebo</span>
   </span>
 </div>
 
@@ -327,6 +346,8 @@
 
 
     
+  
+
 
 
 
@@ -339,6 +360,8 @@
     <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
   
 
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
   
 
 
