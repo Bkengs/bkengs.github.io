@@ -17,6 +17,8 @@
 
 
 
+  <meta name="description" content="js中数据处理函数总结"/>
+
 
 
 
@@ -38,7 +40,7 @@
 
 
 
-<link rel="canonical" href="http://yoursite.com/"/>
+<link rel="canonical" href="http://yoursite.com/2017/09/19/js中数据处理函数总结/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
@@ -77,7 +79,7 @@
 
 
 
-    <title> Code Note </title>
+    <title> js中数据处理函数总结 - Code Note </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -152,14 +154,12 @@
         <div class="content-wrapper">
           <div id="content" class="content">
             
-  <section id="posts" class="posts">
-    
-      
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2017/09/19/js中数据处理函数总结/">js中数据处理函数总结</a>
+          js中数据处理函数总结
         
       </h1>
 
@@ -174,14 +174,17 @@
 
     
     
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#js的原生常用操作方法"><span class="toc-text">js的原生常用操作方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Array"><span class="toc-text">Array</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Number"><span class="toc-text">Number</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String"><span class="toc-text">String</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Function"><span class="toc-text">Function</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js中的循环遍历"><span class="toc-text">js中的循环遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#forEach"><span class="toc-text">forEach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…in"><span class="toc-text">for…in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for…of"><span class="toc-text">for…of</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
 
     <div class="post-content">
       
-        
-        
-
-        
-          <h2 id="js的原生常用操作方法"><a href="#js的原生常用操作方法" class="headerlink" title="js的原生常用操作方法"></a>js的原生常用操作方法</h2><h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><blockquote>
+        <h2 id="js的原生常用操作方法"><a href="#js的原生常用操作方法" class="headerlink" title="js的原生常用操作方法"></a>js的原生常用操作方法</h2><h3 id="Array"><a href="#Array" class="headerlink" title="Array"></a>Array</h3><blockquote>
 <p>注：干净表示不改变原数据，脏表示改变原数据</p>
 </blockquote>
 <ul>
@@ -246,223 +249,47 @@
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>];</div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> val <span class="keyword">of</span> arr)&#123;</div><div class="line">	<span class="built_in">console</span>.log(val);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 5 4 3 4 3</span></div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">let</span> [key, val] <span class="keyword">of</span> arr.entries())&#123; <span class="comment">// keys(), values()</span></div><div class="line">	<span class="built_in">console</span>.log(key, val);</div><div class="line">&#125;</div><div class="line"><span class="comment">// 0 5</span></div><div class="line"><span class="comment">// 1 4</span></div><div class="line"><span class="comment">// 2 3</span></div><div class="line"><span class="comment">// 3 4</span></div><div class="line"><span class="comment">// 4 3</span></div></pre></td></tr></table></figure>
 
-        
       
     </div>
 
     
-
-    
-
-  </article>
-
-    
       
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/09/18/git相关笔记/">git相关笔记</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017-09-18
-        </span>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
       
-        
-        
 
-        
-          <p>收集git的常用命令，和容易遇到的问题和解决办法</p>
-<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><ul>
-<li><code>git config --global user.name &quot;Your Name&quot;</code>，<code>git config --global user.email &quot;email@example.com&quot;</code>用来配置用户名和邮箱，一般在第一次操作时会提醒配置。</li>
-<li><code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</code>执行后默认会在<code>C:\Users\Administrator\.ssh</code>下生成几个文件，只要将其中的<code>id_rsa.pub</code>中的内容复制<br>到（gitlab，github）对应配置ssh的地方保存后就可对有权限的仓库进行代码的push操作。</li>
-<li>在用ssh类型的地址(例如:<code>git@114.55.92.162:chendebo/gitNote.git</code>)项目时，ssh密钥起作用则在push，pull等操作时就不要再次输入密码。</li>
-<li>在使用http类型的地址(例如:<code>http://114.55.92.162/chendebo/gitNote.git</code>)项目时，ssh密钥则无效，为了避免重复输入账号密码：<br>方法一：<code>git config --global credential.helper store</code><br>方法二：clone时添加前缀<code>http://yourname:password@114.55.92.162/chendebo/gitNote.git</code></li>
-<li>如果你正在使用ssh想转换成http：<code>git remote rm origin</code>,<code>git remote add origin http://yourname:password@114.55.92.162/chendebo/gitNote.git</code></li>
-</ul>
-<h3 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h3><h5 id="先本地后远程"><a href="#先本地后远程" class="headerlink" title="先本地后远程"></a>先本地后远程</h5><ul>
-<li><code>git init</code>将当前文件夹初始化为git本地仓库</li>
-<li><code>git remote add origin git@server-name:path/repo-name.git</code>要关联一个远程库(<code>git remote</code> 要查看远程库的信息，或者，用<code>git remote -v</code>显示更详细的信息)</li>
-<li><code>git push -u origin master</code> 第一次推送master分支的所有内容；此后，每次本地提交后，只要有必要，就可以使用命令<code>git push</code>推送最新修改；</li>
-</ul>
-<h5 id="先远程后本地"><a href="#先远程后本地" class="headerlink" title="先远程后本地"></a>先远程后本地</h5><ul>
-<li><code>git clone git@server-name:path/repo-name.git</code> 将远程仓库克隆到本地</li>
-</ul>
-<h3 id="代码的提交"><a href="#代码的提交" class="headerlink" title="代码的提交"></a>代码的提交</h3><ul>
-<li><code>git add file</code>将工作区的代码提交到暂存区，在项目多文件提交是可以使用<code>git add .</code>,<code>git add src/.</code>其中（.）表示文件夹下的所有文件。</li>
-<li><code>git commit -m &#39;注释&#39;</code>将暂存区中的代码提交到本地仓库。</li>
-<li><code>git push</code>将本地仓库的代码修改提交到远程仓库，可以指定提交的仓库，默认为origin</li>
-</ul>
-<h3 id="查看历史和状态"><a href="#查看历史和状态" class="headerlink" title="查看历史和状态"></a>查看历史和状态</h3><ul>
-<li><code>git status</code> 命令可以让我们时刻掌握仓库当前的状态，但是看不出修改了什么</li>
-<li><code>git diff</code> 用来查看修改的细节<code>git diff HEAD filename</code>查看工作区和版本库里面最新版本的区别</li>
-<li><code>git log</code> 命令显示从最近到最远的提交日志，<code>--pretty=oneline</code>参数可简化内容，<code>--graph</code>可以看到分支合并图,<code>--abbrev-commit</code>筛选出提交</li>
-<li><code>git reflog</code> 用来记录你的每一次命令，当你用<code>git reset --hard HEAD^</code>回退到当前版本之前的版本时，再想恢复到当前版本，就必须找到对应commit id</li>
-</ul>
-<h3 id="关于git-reset"><a href="#关于git-reset" class="headerlink" title="关于git reset"></a>关于git reset</h3><ul>
-<li>git reset的版本回退针对的是本地的查看，未push的。（否则回退后提交会冲突）</li>
-<li><code>--soft</code> :工作区会保留修改后的代码,只是将git commit信息回退到了某个版本</li>
-<li><code>--mixed</code>：工作区会保留修改后的代码,只是将git commit和index 信息回退到了某个版本（默认）</li>
-<li><code>--hard</code> ：源码也会回退到某个版本,commit和index 都回回退到某个版本</li>
-<li><code>git reset --hard  id</code> 回退版本，其中id为commit id（通过查找历史课查看），也可以用HEAD（其实为指针）表示当前版本，<br>上一个版本就是<code>HEAD^</code>，上上一个版本就是<code>HEAD^^</code>，当然往上100个版本写100个<code>^</code>比较容易数不过来，所以写成<code>HEAD~100</code>。</li>
-<li><code>git reset HEAD file</code> 可以把暂存区的修改撤销掉（unstage），重新放回工作区</li>
-</ul>
-<ol>
-<li>当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令git checkout – file。</li>
-<li>当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令git reset HEAD file，就回到了场景1，第二步按场景1操作。</li>
-<li>已经提交了不合适的修改到版本库时，想要撤销本次提交，参考版本回退一节，不过前提是没有推送到远程库。</li>
-</ol>
-<h3 id="关于git-revert"><a href="#关于git-revert" class="headerlink" title="关于git revert"></a>关于git revert</h3><ul>
-<li>git revert用一个新提交来消除一个历史提交所做的任何修改.</li>
-<li>revert 之后你的本地代码会回滚到指定的历史版本,这时你再 git push 既可以把线上的代码更新.(这里不会像reset造成冲突的问题)</li>
-<li><code>git revert c011eb3</code></li>
-<li>git revert是用一次新的commit来回滚之前的commit，git reset是直接删除指定的commit</li>
-</ul>
-<h3 id="关于git-checkout"><a href="#关于git-checkout" class="headerlink" title="关于git checkout"></a>关于git checkout</h3><ul>
-<li><code>git checkout filename</code>把filename文件在工作区的修改全部撤销,情况一：自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；<br>情况二：已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。总之，就是让这个文件回到最近一次<code>git commit</code>或<code>git add</code>时的状态<br><code>git checkout</code> 其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。</li>
-</ul>
-<h3 id="关于git-stash"><a href="#关于git-stash" class="headerlink" title="关于git stash"></a>关于git stash</h3><ul>
-<li><code>git stash</code> 可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作</li>
-<li><code>git stash apply</code> 恢复，但是恢复后，stash内容并不删除</li>
-<li><code>git stash drop</code> 来删除stash内容；</li>
-<li><code>git stash pop</code> 恢复的同时把stash内容也删了</li>
-<li><code>git stash list</code> 查看，然后恢复指定的stash，用命令： git stash apply stash@{0}</li>
-</ul>
-<h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><ul>
-<li><code>git branch</code> 查看分支</li>
-<li><code>git branch &lt;name&gt;</code> 创建分支</li>
-<li><code>git checkout &lt;name&gt;</code> 切换分支</li>
-<li><code>git checkout -b &lt;name&gt;</code> 创建+切换分支</li>
-<li><code>git merge &lt;name&gt;</code> 合并某分支到当前分支</li>
-<li><code>git branch -d &lt;name&gt;</code> 删除分支</li>
-</ul>
-<h3 id="关于标签"><a href="#关于标签" class="headerlink" title="关于标签"></a>关于标签</h3><ul>
-<li><code>git tag</code> 查看所有标签</li>
-<li><code>git show &lt;tagname&gt;</code> 查看标签信息创建带有说明的标签，用-a指定标签名，-m指定说明文字：<code>git tag -a v0.1 -m &quot;version 0.1 released&quot; 3628164</code></li>
-<li><code>git tag -s &lt;tagname&gt; -m &quot;blablabla...&quot;</code>可以用PGP签名标签</li>
-<li><code>git push origin &lt;tagname&gt;</code>可以推送一个本地标签；</li>
-<li><code>git push origin --tags</code>可以推送全部未推送过的本地标签；</li>
-<li><code>git tag -d &lt;tagname&gt;</code>可以删除一个本地标签；</li>
-<li><code>git push origin :refs/tags/&lt;tagname&gt;</code>可以删除一个远程标签</li>
-</ul>
-<h3 id="常见问题及解决方法"><a href="#常见问题及解决方法" class="headerlink" title="常见问题及解决方法"></a>常见问题及解决方法</h3><ul>
-<li>A从B那fork了一个项目，之后A对派生过来项目进行了修改，B对自己的项目也进行了修改，一段时间后A想合并B的最新代码怎么办？</li>
-</ul>
-<blockquote>
-<p>fork后的项目一般会clone到本地进行修改，在克隆的过程中确实就已经将你本地仓库可你fork后的项目进行了管理<br>也就是执行了 <code>git remote add origin git@server-name:path/repo-name.git</code>(通过<code>git remote</code>可以查看你本地仓库关联的远程仓库)<br>此时只要执行 <code>git remote add oor git@server-name:path/repo-name.git</code> 关联B的原始项目仓库，再执行<code>git pull oor</code>将B修改过后<br>的代码更新到本地，然后在origin master分支上执行<code>git merge oor/master</code>就可以合并B修改后的代码了（主要在合并操作请需要将本地修改的代码add，commit）<br>最后解决冲突提交即可。</p>
-</blockquote>
-<ul>
-<li>在git pull时出现<code>ssh: connect to host 114.55.92.162 port 22: Connection timed out fatal: Could not read from remote repository....</code></li>
-</ul>
-<blockquote>
-<p><code>vi /etc/ssh/sshd_config</code> 编辑配置文件，将port 22和protocol 2的注释去掉可以解决问题。</p>
-</blockquote>
-<ul>
-<li>在git pull时提示<code>no tracking information</code></li>
-</ul>
-<blockquote>
-<p>说明本地分支和远程分支的链接关系没有创建，用命令<code>git branch --set-upstream branch-name remote-name/branch-name</code>例如<code>git branch --set-upstream dev origin/dev</code></p>
-</blockquote>
 
-        
+
       
-    </div>
-
-    
-
-    
-
-  </article>
-
-    
       
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2017/09/18/hello-world/">本博客的搭建过程</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2017-09-18
-        </span>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
-      
-        
-        
-
-        
-          <p>本博客是通过github+hexo+even来快速自动化生成的</p>
-<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><h3 id="在github上新建一个仓库"><a href="#在github上新建一个仓库" class="headerlink" title="在github上新建一个仓库"></a>在github上新建一个仓库</h3><blockquote>
-<p>仓库名字格式为：<em>username.github.io</em><br>其中username和你的github名字保持一致</p>
-</blockquote>
-<p><img src="/img/hello-word/0.png" alt="Alt text"></p>
-<h3 id="全局安装hexo"><a href="#全局安装hexo" class="headerlink" title="全局安装hexo"></a>全局安装hexo</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ cnpm install -g hexo</div></pre></td></tr></table></figure>
-<h3 id="初始化博客工程"><a href="#初始化博客工程" class="headerlink" title="初始化博客工程"></a>初始化博客工程</h3><blockquote>
-<p>新建一个文件夹（test），在文件夹下执行</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init</div></pre></td></tr></table></figure>
-<h3 id="在本地预览"><a href="#在本地预览" class="headerlink" title="在本地预览"></a>在本地预览</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo g</div><div class="line">$ hexo s</div></pre></td></tr></table></figure>
-<blockquote>
-<p><code>hexo g</code> 根据配置文件和静态资源生成静态页面<br><code>hexo s</code> 在本地预览该项目</p>
-</blockquote>
-<h3 id="将该项目与github仓库关联"><a href="#将该项目与github仓库关联" class="headerlink" title="将该项目与github仓库关联"></a>将该项目与github仓库关联</h3><blockquote>
-<p>修改项目根目录下的_config.yml中的对应配置项，如图<br>要注意的是配置项的冒号后面都会有个空格！<br><img src="/img/hello-word/2.png" alt="Alt text"></p>
-</blockquote>
-<h3 id="将项目发布到github上"><a href="#将项目发布到github上" class="headerlink" title="将项目发布到github上"></a>将项目发布到github上</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo d</div></pre></td></tr></table></figure>
-<p>在<code>hexo g</code>后可以通过该命令将项目打包后的文件push到github上<br>此时你就可以通过<em><a href="https://username.github.io" target="_blank" rel="external">https://username.github.io</a>.</em> 来访问你的线上博客了。</p>
-<h3 id="添加你的博客文章"><a href="#添加你的博客文章" class="headerlink" title="添加你的博客文章"></a>添加你的博客文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">'blogname'</span></div></pre></td></tr></table></figure>
-<p>通过以上命令可以直接生成md文件，在里面书写你的博客内容。然后<code>hexo g</code>,<code>hexo d</code>来推送到github上。在本地书写时，可以<code>hexo s</code>来预览效果。</p>
-<h3 id="更换主题"><a href="#更换主题" class="headerlink" title="更换主题"></a>更换主题</h3><p>在<a href="https://hexo.io/themes/" target="_blank" rel="external">hexo theme</a>里预览主题，挑选喜欢的主题后，进入对应的github仓库，里面都会有详细的使用说明<br>这里以<strong>even</strong>为例，<br>下载主题资源,text目录下执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cnpm install hexo-renderer-scss --save</div><div class="line">$ git <span class="built_in">clone</span> https://github.com/ahonn/hexo-theme-even themes/even</div></pre></td></tr></table></figure></p>
-<p>将根目录下的theme配置项设置为even</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ hexo clean</div><div class="line">$ hexo g</div><div class="line">$ hexo d</div></pre></td></tr></table></figure>
-<p>具体的主题配置参考个主题仓库的说明文档。</p>
-<pre><code>以上的g,d,s等都是hexo的命令缩写，具体可以同hexo --help来查看具体内容。
-</code></pre>
-        
-      
-    </div>
-
     
 
     
-
-  </article>
-
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
     
+      <a class="next" href="/2017/09/18/git相关笔记/">
+        <span class="next-text nav-default">git相关笔记</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
+
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
@@ -539,6 +366,8 @@
     </div>
 
     
+  
+
 
 
     
