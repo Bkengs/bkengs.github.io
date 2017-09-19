@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="git相关笔记"/>
+  <meta name="description" content="收集git的常用命令，和容易遇到的问题和解决办法"/>
 
 
 
@@ -184,8 +184,7 @@
 
     <div class="post-content">
       
-        <p>收集git的常用命令，和容易遇到的问题和解决办法</p>
-<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><ul>
+        <h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><ul>
 <li><code>git config --global user.name &quot;Your Name&quot;</code>，<code>git config --global user.email &quot;email@example.com&quot;</code>用来配置用户名和邮箱，一般在第一次操作时会提醒配置。</li>
 <li><code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</code>执行后默认会在<code>C:\Users\Administrator\.ssh</code>下生成几个文件，只要将其中的<code>id_rsa.pub</code>中的内容复制<br>到（gitlab，github）对应配置ssh的地方保存后就可对有权限的仓库进行代码的push操作。</li>
 <li>在用ssh类型的地址(例如:<code>git@114.55.92.162:chendebo/gitNote.git</code>)项目时，ssh密钥起作用则在push，pull等操作时就不要再次输入密码。</li>
@@ -379,8 +378,6 @@
   <span class="copyright-year">
     
     &copy; 
-     
-      2015 - 
     
     2017
 
