@@ -237,9 +237,9 @@
 </ul>
 <h2 id="js中的循环遍历"><a href="#js中的循环遍历" class="headerlink" title="js中的循环遍历"></a>js中的循环遍历</h2><p>while,do-while,for(let i, length = arr.length; i &lt; length; i++)这里就不提了</p>
 <h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach"></a>forEach</h3><blockquote>
-<p>forEach是数组对象自带的</p>
+<p>forEach是数组对象自带的,没有返回值</p>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>];</div><div class="line">arr.forEach(<span class="function">(<span class="params">v,i</span>) =&gt;</span> &#123;</div><div class="line">	consoel.log(v,i);</div><div class="line">&#125;)</div><div class="line"><span class="comment">// 5 0</span></div><div class="line"><span class="comment">// 4 1</span></div><div class="line"><span class="comment">// 3 2</span></div><div class="line"><span class="comment">// 2 3</span></div><div class="line"><span class="comment">// 1 4</span></div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> arr = [<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>];</div><div class="line">arr.forEach(<span class="function">(<span class="params">v,i</span>) =&gt;</span> &#123;</div><div class="line">	<span class="built_in">console</span>.log(v,i);</div><div class="line">&#125;)</div><div class="line"><span class="comment">// 5 0</span></div><div class="line"><span class="comment">// 4 1</span></div><div class="line"><span class="comment">// 3 2</span></div><div class="line"><span class="comment">// 2 3</span></div><div class="line"><span class="comment">// 1 4</span></div></pre></td></tr></table></figure>
 <h3 id="for…in"><a href="#for…in" class="headerlink" title="for…in"></a>for…in</h3><blockquote>
 <p>for…in主要是用来遍历数组或者对象的键值名，主要用于对象<br>数组的键名是数字，但是for…in循环是以字符串作为键名“0”、“1”、“2”等等。<br>for…in循环不仅遍历数字键名，还会遍历手动添加的其他键，甚至包括原型链上的键。<br>某些情况下，for…in循环会以任意顺序遍历键名。</p>
 </blockquote>
@@ -306,7 +306,7 @@
     
       
         
-          <a href="mailto:chendebofrontend@gmail.com" class="iconfont icon-email" title="email"></a>
+          <a href="mailto:15757165446@163.com" class="iconfont icon-email" title="email"></a>
         
       
     

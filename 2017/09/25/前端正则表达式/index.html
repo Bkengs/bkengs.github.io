@@ -177,7 +177,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#🌰"><span class="toc-text">🌰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础概念"><span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#转义字符"><span class="toc-text">转义字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号"><span class="toc-text">括号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符"><span class="toc-text">元字符</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#🌰"><span class="toc-text">🌰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础概念"><span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#转义字符"><span class="toc-text">转义字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号"><span class="toc-text">括号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符"><span class="toc-text">元字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重复限定符"><span class="toc-text">重复限定符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#贪婪模式与非贪婪模式"><span class="toc-text">贪婪模式与非贪婪模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修饰符"><span class="toc-text">修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字符组"><span class="toc-text">字符组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#排除性字符组"><span class="toc-text">排除性字符组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多选结构"><span class="toc-text">多选结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作符的运算优先级"><span class="toc-text">操作符的运算优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用的正则表达式"><span class="toc-text">常用的正则表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文献："><span class="toc-text">参考文献：</span></a></li></ol></li></ol>
     </div>
   </div>
 
@@ -199,10 +199,8 @@
 <p>的确有的时候不转义也不会出现问题，比如上述正则表达式中，写成<code>/{{(.*?)}}/g</code>也是能实现想要的效果。不过为了不出现不必要的错误，最好都加上转义符。</p>
 <p>所以<code>\{\{</code>就表示连续匹配2个大括号，如果不是特殊字符，直接连在一起就好了。举个🌰：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/\&#123;\&#123;/.test(<span class="string">"&#123;&#123;"</span>);  <span class="comment">//true</span></div><div class="line">/ab/.test(<span class="string">"ab"</span>);    <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
 <h3 id="括号"><a href="#括号" class="headerlink" title="括号"></a>括号</h3><p>接下来的字符就是<code>(</code></p>
-<blockquote>
-<p>括号就是将字符<strong>分组</strong>.</p>
-</blockquote>
-<p>后面结合限定符做统一举例说明。</p>
+<pre><code>括号 常用来界定重复限定符的范围, 以及将字符分组. 如: (ab)+ 可以匹配abab..等, 其中 ab 便是一个分组.
+</code></pre><p>有时候加括号只是为了方便阅读，本例子便是如此</p>
 <h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><p>接下来的<code>.</code>就是元字符中的一个</p>
 <table>
 <thead>
@@ -242,7 +240,134 @@
 </tr>
 </tbody>
 </table>
-<p>我们一次举例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 以数字开头，字母结尾的，中间含有一个任意字符</span></div><div class="line">/^\d\w$/</div></pre></td></tr></table></figure></p>
+<p>对应也有反义元字符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">元字符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">\D</td>
+<td style="text-align:center">匹配非数字的任意字符, 等价于[^0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center">\W</td>
+<td style="text-align:center">匹配除字母,数字,下划线之外的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\S</td>
+<td style="text-align:center">匹配非空白的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\B</td>
+<td style="text-align:center">匹配非单词开始或结束的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">^x</td>
+<td style="text-align:center">匹配除x以外的任意字符</td>
+</tr>
+</tbody>
+</table>
+<h3 id="重复限定符"><a href="#重复限定符" class="headerlink" title="重复限定符"></a>重复限定符</h3><p><code>*</code>,<code>?</code>是一个重复限定符</p>
+<pre><code>a为重复次数
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:center">限定符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">*</td>
+<td style="text-align:center">a&gt;=0</td>
+</tr>
+<tr>
+<td style="text-align:center">+</td>
+<td style="text-align:center">a&gt;=1</td>
+</tr>
+<tr>
+<td style="text-align:center">？</td>
+<td style="text-align:center">a=0 或 a=1</td>
+</tr>
+<tr>
+<td style="text-align:center">{n}</td>
+<td style="text-align:center">a=n</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,}</td>
+<td style="text-align:center">a&gt;=n</td>
+</tr>
+<tr>
+<td style="text-align:center">{n,m}</td>
+<td style="text-align:center">n&lt;=x&lt;=m</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>那么<code>/\{\{(.*?)\}\}/g</code>中的<strong> (.*?) </strong>是什么意思呢？<br>按照上面的规则，这里是无法理解的。其实这里涉及到了<strong>贪婪模式与非贪婪模式</strong></p>
+</blockquote>
+<h3 id="贪婪模式与非贪婪模式"><a href="#贪婪模式与非贪婪模式" class="headerlink" title="贪婪模式与非贪婪模式"></a>贪婪模式与非贪婪模式</h3><p>贪婪模式（默认情况）：尽可能多的去匹配字符。<br>非贪婪模式（在限定词后增加？）：尽可能少的去匹配字符。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> tpl =  <span class="string">"&lt;div&gt;&lt;span&gt;&#123;&#123;name&#125;&#125;&lt;/span&gt;&lt;b&gt;&#123;&#123;sex&#125;&#125;&lt;/b&gt;&lt;s&gt;&#123;&#123;age&#125;&#125;&lt;/s&gt;&lt;/div&gt;"</span></div><div class="line">tpl.match(<span class="regexp">/\&#123;\&#123;(.*?)\&#125;\&#125;/g</span>);</div><div class="line"><span class="comment">//["&#123;&#123;name&#125;&#125;", "&#123;&#123;sex&#125;&#125;", "&#123;&#123;age&#125;&#125;"]</span></div><div class="line">tpl.match(<span class="regexp">/\&#123;\&#123;(.*)\&#125;\&#125;/g</span>);</div><div class="line"><span class="comment">//["&#123;&#123;name&#125;&#125;&lt;/span&gt;&lt;b&gt;&#123;&#123;sex&#125;&#125;&lt;/b&gt;&lt;s&gt;&#123;&#123;age&#125;&#125;"]</span></div></pre></td></tr></table></figure>
+<p>一般情况下, 非贪婪模式, 我们使用的是”*?”, 或 “+?” 这种形式, 还有一种是 “{n,m}?”.<br>区间量词”{n,m}” 也是匹配优先, 虽有匹配次数上限, 但是在到达上限之前, 它依然是尽可能多的匹配, 而”{n,m}?” 则表示在区间范围内, 尽可能少的匹配.</p>
+<h3 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h3><p>例子中的结尾<strong>g</strong>就是一个修饰符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">修饰符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">g</td>
+<td style="text-align:center">全文查找</td>
+</tr>
+<tr>
+<td style="text-align:center">i</td>
+<td style="text-align:center">忽略大小写查找</td>
+</tr>
+<tr>
+<td style="text-align:center">m</td>
+<td style="text-align:center">多行查找</td>
+</tr>
+<tr>
+<td style="text-align:center">y</td>
+<td style="text-align:center">ES6新增的粘连修饰符</td>
+</tr>
+<tr>
+<td style="text-align:center">u</td>
+<td style="text-align:center">ES6新增,用来正确处理大于 \uFFFF 的Unicode字符</td>
+</tr>
+</tbody>
+</table>
+<p>g,i比较好理解，下面举例说明下m,y,u<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// m模式</span></div><div class="line"><span class="keyword">let</span> str=<span class="string">"This is an\n an apple"</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="regexp">/an$/</span>.test(str));</div><div class="line"><span class="comment">// false</span></div><div class="line"><span class="built_in">console</span>.log(<span class="regexp">/an$/m</span>.test(str));</div><div class="line"><span class="comment">//true</span></div><div class="line"></div><div class="line"><span class="comment">// u模式</span></div><div class="line">/^\uD83D/.test(<span class="string">'\uD83D\uDC2A'</span>) <span class="comment">// true  </span></div><div class="line">/^\uD83D/u.test(<span class="string">'\uD83D\uDC2A'</span>) <span class="comment">// false</span></div><div class="line">/吉&#123;<span class="number">2</span>&#125;/.test(<span class="string">'吉吉'</span>) <span class="comment">// false  </span></div><div class="line">/吉&#123;<span class="number">2</span>&#125;/u.test(<span class="string">'吉吉'</span>) <span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="comment">// y模式</span></div><div class="line"><span class="keyword">var</span> s = <span class="string">'aaa_aa_a'</span>;  </div><div class="line"><span class="keyword">var</span> r1 = <span class="regexp">/a+/g</span>;  </div><div class="line"><span class="keyword">var</span> r2 = <span class="regexp">/a+/y</span>;  </div><div class="line">  </div><div class="line"><span class="built_in">console</span>.log(r1.exec(s)) <span class="comment">//["aaa", index: 0, input: "aaa_aa_a"]  </span></div><div class="line"><span class="built_in">console</span>.log(r2.exec(s)) <span class="comment">//["aaa", index: 0, input: "aaa_aa_a"]  </span></div><div class="line"><span class="built_in">console</span>.log(r1.exec(s)) <span class="comment">//["aa", index: 4, input: "aaa_aa_a"]  </span></div><div class="line"><span class="built_in">console</span>.log(r2.exec(s)) <span class="comment">//null  </span></div><div class="line"><span class="built_in">console</span>.log(r1.exec(s)) <span class="comment">//["a", index: 7, input: "aaa_aa_a"]  </span></div><div class="line"><span class="built_in">console</span>.log(r2.exec(s)) <span class="comment">//["aaa", index: 0, input: "aaa_aa_a"]</span></div></pre></td></tr></table></figure></p>
+<p>没有涉及到的好有很多，比较常用的有</p>
+<h3 id="字符组"><a href="#字符组" class="headerlink" title="字符组"></a>字符组</h3><p>[…] 匹配中括号内字符之一. 如: [xyz] 匹配字符 x, y 或 z. 如果中括号中包含元字符, 则元字符降级为普通字符, 不再具有元字符的功能, 如 [+.?] 匹配 加号, 点号或问号.</p>
+<h3 id="排除性字符组"><a href="#排除性字符组" class="headerlink" title="排除性字符组"></a>排除性字符组</h3><p>[^…] 匹配任何未列出的字符,. 如: [^x] 匹配除x以外的任意字符.</p>
+<h3 id="多选结构"><a href="#多选结构" class="headerlink" title="多选结构"></a>多选结构</h3><p>| 就是或的意思, 表示两者中的一个. 如: a|b 匹配a或者b字符.</p>
+<h3 id="操作符的运算优先级"><a href="#操作符的运算优先级" class="headerlink" title="操作符的运算优先级"></a>操作符的运算优先级</h3><ol>
+<li>\ 转义符</li>
+<li>(), (?:), (?=), [] 圆括号或方括号</li>
+<li>*, +, ?, {n}, {n,}, {n,m} 限定符</li>
+<li>^, $ 位置</li>
+<li>| “或” 操作</li>
+</ol>
+<h3 id="常用的正则表达式"><a href="#常用的正则表达式" class="headerlink" title="常用的正则表达式"></a>常用的正则表达式</h3><ol>
+<li>汉字: ^[\u4e00-\u9fa5]{0,}$</li>
+<li>Email: ^\w+([-+.]\w+)<em>@\w+([-.]\w+)</em>.\w+([-.]\w+)*$</li>
+<li>URL: ^https?://([\w-]+.)+[\w-]+(/[\w-./?%&amp;=]*)?$</li>
+<li>手机号码: ^1\d{10}$</li>
+<li>身份证号: ^(\d{15}|\d{17}(\d|X))$</li>
+<li>中国邮政编码: [1-9]\d{5}(?!\d) (邮政编码为6位数字)</li>
+</ol>
+<blockquote>
+<p>以上内容仅仅是最常用也是最基础的正则表达式的知识。</p>
+</blockquote>
+<h3 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h3><p><a href="http://louiszhai.github.io/2016/06/13/regexp/#" target="_blank" rel="external">正则表达式前端使用手册</a></p>
 
       
     </div>
@@ -295,7 +420,7 @@
     
       
         
-          <a href="mailto:chendebofrontend@gmail.com" class="iconfont icon-email" title="email"></a>
+          <a href="mailto:15757165446@163.com" class="iconfont icon-email" title="email"></a>
         
       
     
