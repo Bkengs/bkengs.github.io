@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="由于正则表达式在一般的开发过程中用的不是很频繁，所以导致每次看了忘，用到时还是要去网上查。一些常见的规则找找还好，遇到一些比较独特的规则需求，就要花些时间去查了。所以自己就整理一下这块内容，即使还是记不住，也好让自己下次能够快点解决。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Code Note">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2017/09/25/前端正则表达式/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 前端正则表达式 - Code Note </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Code Note</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Code Note</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          前端正则表达式
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-25
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#🌰"><span class="toc-text">🌰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基础概念"><span class="toc-text">基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#转义字符"><span class="toc-text">转义字符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#括号"><span class="toc-text">括号</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元字符"><span class="toc-text">元字符</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h2 id="🌰"><a href="#🌰" class="headerlink" title="🌰"></a>🌰</h2><p>前段时间，在封装一个组件时，考虑到组件的实用性。需要自己实现一个简单的<code>{{ variable }}</code>模板数据绑定技术。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> listData = [&#123;</div><div class="line">                    name: <span class="string">"张三"</span>,</div><div class="line">                    sex: <span class="string">"男"</span>,</div><div class="line">                    age: <span class="string">"20"</span></div><div class="line">                &#125;,&#123;</div><div class="line">                    name: <span class="string">"小明"</span>,</div><div class="line">                    sex: <span class="string">"男"</span>,</div><div class="line">                    age: <span class="string">"23"</span></div><div class="line">                &#125;,&#123;</div><div class="line">                    name: <span class="string">"王五"</span>,</div><div class="line">                    sex: <span class="string">"女"</span>,</div><div class="line">                    age: <span class="string">"21"</span></div><div class="line">                &#125;];</div><div class="line">                </div><div class="line"><span class="keyword">let</span> tpl =  <span class="string">"&lt;div&gt;&lt;span&gt;&#123;&#123;name&#125;&#125;&lt;/span&gt;&lt;b&gt;&#123;&#123;sex&#125;&#125;&lt;/b&gt;&lt;s&gt;&#123;&#123;age&#125;&#125;&lt;/s&gt;&lt;/div&gt;"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">translateTpl</span>(<span class="params">data, tpl</span>) </span>&#123;</div><div class="line">    <span class="keyword">let</span> newTpl = <span class="string">''</span>;</div><div class="line">    data.forEach(<span class="function">(<span class="params">v</span>) =&gt;</span> &#123;</div><div class="line">        newTpl += tpl.replace(<span class="regexp">/\&#123;\&#123;(.*?)\&#125;\&#125;/g</span>, (i) =&gt; &#123;</div><div class="line">                      <span class="keyword">return</span> v[i.substring(<span class="number">2</span>,i.length<span class="number">-2</span>)];</div><div class="line">                  &#125;);</div><div class="line">    &#125;)</div><div class="line">    <span class="keyword">return</span> newTpl;</div><div class="line">&#125;</div><div class="line"></div><div class="line">translateTpl(listData, tpl);</div><div class="line"><span class="comment">// "&lt;div&gt;&lt;span&gt;张三&lt;/span&gt;&lt;b&gt;男&lt;/b&gt;&lt;s&gt;20&lt;/s&gt;&lt;/div&gt;   </span></div><div class="line"><span class="comment">//  &lt;div&gt;&lt;span&gt;小明&lt;/span&gt;&lt;b&gt;男&lt;/b&gt;&lt;s&gt;23&lt;/s&gt;&lt;/div&gt;   </span></div><div class="line"><span class="comment">//  &lt;div&gt;&lt;span&gt;王五&lt;/span&gt;&lt;b&gt;女&lt;/b&gt;&lt;s&gt;21&lt;/s&gt;&lt;/div&gt;"</span></div></pre></td></tr></table></figure>
+<pre><code>在实际开发中还需要加上数据类型的判断，错误异常的处理。   
+</code></pre><p>上面的代码就是实现一个简单的数据渲染，将listData中的数据遍历渲染到模板tpl中，产生一个新的用于展示的html代码。其中用就到了正则表达式<code>/\{\{(.*?)\}\}/g</code>，显然这是用来匹配双大括号的，类似于现在很多流行框架的模板数据绑定，不过这是一个简易版。</p>
+<h2 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h2><p>接下来我们就通过上面用到的<code>/\{\{(.*?)\}\}/g</code>来说明一下正则表达式的基础概念。</p>
+<p>首先，一个正则表达式的主体部分是有2个斜杠包起来的，至于上例中末尾的g，我们后面会讲到。我们从左到右依次来解释每个字符的含义。</p>
+<h3 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h3><p>没错，我们没看到的第一个字符就是<strong>反斜杠</strong>。反斜杠在正则表达式中就是叫<strong>转义字符</strong>。由于有很多字符在正则表达式中有特殊的含义，有时候我们需要将他们当做普通字符来匹配时就需要使用转义符来转义。举个🌰：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/a+b/.test(<span class="string">'a+b'</span>);    <span class="comment">// false</span></div><div class="line">/a\+b/.test(<span class="string">'a+b'</span>);   <span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p><code>+</code> 有特殊的含义，所以如果要将它当做普通字符来处理的话就需要用转义符。</p>
+<blockquote>
+<p>一般情况下, <strong>\ * + ? | { [ ( ) ] }^ $ . #</strong> 和 <strong>空白</strong> 这些字符都需要转义.</p>
+</blockquote>
+<p>的确有的时候不转义也不会出现问题，比如上述正则表达式中，写成<code>/{{(.*?)}}/g</code>也是能实现想要的效果。不过为了不出现不必要的错误，最好都加上转义符。</p>
+<p>所以<code>\{\{</code>就表示连续匹配2个大括号，如果不是特殊字符，直接连在一起就好了。举个🌰：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/\&#123;\&#123;/.test(<span class="string">"&#123;&#123;"</span>);  <span class="comment">//true</span></div><div class="line">/ab/.test(<span class="string">"ab"</span>);    <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<h3 id="括号"><a href="#括号" class="headerlink" title="括号"></a>括号</h3><p>接下来的字符就是<code>(</code></p>
+<blockquote>
+<p>括号就是将字符<strong>分组</strong>.</p>
+</blockquote>
+<p>后面结合限定符做统一举例说明。</p>
+<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><p>接下来的<code>.</code>就是元字符中的一个</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">元字符</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">.</td>
+<td style="text-align:center">匹配除换行符以外的任意字符</td>
+</tr>
+<tr>
+<td style="text-align:center">\d</td>
+<td style="text-align:center">匹配数字, 等价于字符组[0-9]</td>
+</tr>
+<tr>
+<td style="text-align:center">\w</td>
+<td style="text-align:center">匹配字母, 数字, 下划线</td>
+</tr>
+<tr>
+<td style="text-align:center">\s</td>
+<td style="text-align:center">匹配任意的空白符(包括制表符,空格,换行等)</td>
+</tr>
+<tr>
+<td style="text-align:center">\b</td>
+<td style="text-align:center">匹配单词开始或结束的位置</td>
+</tr>
+<tr>
+<td style="text-align:center">^</td>
+<td style="text-align:center">匹配行首</td>
+</tr>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">匹配行尾</td>
+</tr>
+</tbody>
+</table>
+<p>我们一次举例：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 以数字开头，字母结尾的，中间含有一个任意字符</span></div><div class="line">/^\d\w$/</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2017/09/19/lodash/">
+        <span class="next-text nav-default">lodash中常用函数</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:chendebofrontend@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+    
+    2017
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">chendebo</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
