@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="本文章主要介绍promise在项目中的实际使用场景"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Code Note">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/02/27/promise/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> Promise - Code Note </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Code Note</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Code Note</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Promise
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-02-27
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#说明"><span class="toc-text">说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用场景"><span class="toc-text">使用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对接口返回数据的缓存"><span class="toc-text">对接口返回数据的缓存</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>  关于Promise的基本语法可以从<a href="http://es6.ruanyifeng.com/#docs/promise" target="_blank" rel="external">ECMAScript 6 入门–Promise对象</a>中获取。本文主要记录自己在项目中关于Promise对象的使用，并进行对象的说明。本文后续会不断补充Promise的使用场景。</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><pre><code>由于代码是直接摘取项目中实际使用的代码，所以可能会涉及到一些框架的知识背景。
+</code></pre><h3 id="对接口返回数据的缓存"><a href="#对接口返回数据的缓存" class="headerlink" title="对接口返回数据的缓存"></a>对接口返回数据的缓存</h3><pre><code>由于请求接口是一个异步的过程，如果使用普通变量对接口的返回数据进行缓存，就会导致在程序中去访问这个变量时，这个变量可能还未得到接口返回的数据。这里我们就可以使用Promsie来很好的解决这个问题。
+</code></pre><p><strong>第一版</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">public stationList: any[] = [];</div><div class="line"></div><div class="line">public getStationList(): <span class="built_in">Promise</span>&lt;any[]&gt; &#123;</div><div class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>.stationList.length === <span class="number">0</span>) &#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">this</span>.http</div><div class="line">       .get(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.apiUrl&#125;</span>/api/index/getSampleStationAll`</span>)</div><div class="line">       .map(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">         <span class="keyword">return</span> res.json();</div><div class="line">       &#125;)</div><div class="line">       .toPromise()</div><div class="line">       .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">         <span class="keyword">this</span>.stationList = res;</div><div class="line">         <span class="keyword">return</span> <span class="keyword">this</span>.stationList;</div><div class="line">       &#125;);</div><div class="line">   &#125; <span class="keyword">else</span> &#123;</div><div class="line">     <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">       resolve(<span class="keyword">this</span>.stationList);</div><div class="line">     &#125;);</div><div class="line">   &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>由于项目中多处用到电站列表，所以这里对接口返回的电站列表进行缓存。上面代码的思路是通过变量stationList来保存接口返回的数据。在代码中，我们通过getStationList().then()的方式来获取到数据。getStationList()返回一个Promise对象，通过stationList是否有数据来判断是调用接口还是new一个Promise对象将stationList数据resolve()出来.</p>
+</blockquote>
+<pre><code>上面的代码存在一个不足的地方，就是每次调用getStationList()都要重新实例化一个Promise对象。下面我们对代码进行改进。
+</code></pre><p><strong>第二版</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">public stationList: <span class="built_in">Promise</span>&lt;any[]&gt; = <span class="literal">null</span>;</div><div class="line"></div><div class="line">public getStationList(): <span class="built_in">Promise</span>&lt;any[]&gt; &#123;</div><div class="line">  <span class="keyword">if</span> (!<span class="keyword">this</span>.stationList) &#123;</div><div class="line">    <span class="keyword">this</span>.stationList = <span class="keyword">this</span>.http</div><div class="line">      .get(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.apiUrl&#125;</span>/api/index/getSampleStationAll`</span>)</div><div class="line">      .map(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">return</span> res.json();</div><div class="line">      &#125;)</div><div class="line">      .toPromise();</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.stationList;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>这里主要的修改就是将stationList的类型改为了Promise对象。getStationList()中通过stationList是否有值来判断是直接返回stationList还是去调接口。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2017/12/07/前端跨域问题总结/">
+        <span class="next-text nav-default">前端跨域问题总结</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:15757165446@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">chendebo</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
