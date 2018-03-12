@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="本篇博客主要谈谈js中this的指向问题，谈到这个必不可少的会涉及到js中的另外一个关键知识点new。这里我们将这2块结合起来讲。"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Code Note">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/03/12/谈谈js里的this和new/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 谈谈js里的this和new - Code Note </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Code Note</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Code Note</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          谈谈js里的this和new
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-03-12
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#传统函数中的this"><span class="toc-text">传统函数中的this</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#箭头函数中的this"><span class="toc-text">箭头函数中的this</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前段时间公司一位前端实习生过来请教js中的this指向问题。这个问题确实是前端开发中经常会遇到的问题。但是这个问题比较杂，回答起来有些费劲。还好，最后能够让他弄清楚这块知识点。这也让我有写这篇博客的想法。</p>
+<pre><code>简单的说，传统函数中的this指向的执行该函数时运行环境，ES6箭头函数中的this则指向的定义该函数时的运行环境。
+</code></pre><h2 id="传统函数中的this"><a href="#传统函数中的this" class="headerlink" title="传统函数中的this"></a>传统函数中的this</h2><p>我们来看几个🌰：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> a = <span class="number">2</span>;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">&#125;</div><div class="line"></div><div class="line">test();  <span class="comment">// 1</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> context = &#123; <span class="attr">a</span>: <span class="number">3</span>, <span class="attr">b</span>: <span class="number">2</span> &#125;;</div><div class="line">test.call(context); <span class="comment">// 3</span></div></pre></td></tr></table></figure>
+<p>第一次执行函数<code>test</code>时，是在全局的环境下，所以<code>this</code>指向的是<code>window</code>，<code>this.a</code>也就为全局定义的<code>a</code>了。<br>第二次执行<code>test</code>时，我们通过<code>call</code>方法来改变了<code>test</code>函数的执行环境，这时的<code>this</code>指向的就是<code>context</code>对象了，所以也就打印出了<code>3</code>。<br>从中我们可以看出，函数中的<code>this</code>会随着执行时的上下文环境的改变而改变。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.a = <span class="number">1</span>;</div><div class="line">  <span class="keyword">this</span>.c = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> testObj = <span class="keyword">new</span> Test();</div><div class="line"></div><div class="line">testObj.c(); <span class="comment">// 1</span></div><div class="line">testObj.d(); <span class="comment">// 0</span></div></pre></td></tr></table></figure>
+<p>这里我们定义了一个构造函数<code>Test</code>，然后通过它实例化了<code>testObj</code>对象，执行<code>testObj</code>的<code>c</code>方法，由于<code>c</code>方法是在<code>testObj</code>的环境下运行的，所以这里的<code>this</code>执行的是<code>testObj</code>这个对象，也就打印出了内部属性<code>a</code>。<br>类似的<code>d</code>方法一样的也是在<code>testObj</code>的环境下运行的，结果却打印出了<code>0</code>，也就是全局的<code>a</code>变量，这是为什么？<br>其实这里涉及到了异步的知识，<code>d</code>方法内部是执行了一个定时器，0.1s后运行一个匿名函数，打印出<code>this.a</code>。<code>d</code>函数是在<code>testObj</code>的环境下执行的，可是这个的匿名函数根据异步函数的运行原理可以知道，它是在全局的环境下运行的。所以这里的<code>this</code>也就指向的是<code>window</code>。<em>（关于异步，后面会专门写一篇博客谈谈）</em></p>
+<p>我们如何实现在这个匿名函数中打印出testObj的a属性？代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 方法 1</span></div><div class="line">  <span class="keyword">this</span>.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> that = <span class="keyword">this</span>;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(that.a);</div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"><span class="comment">// 方法 2</span></div><div class="line">  <span class="keyword">this</span>.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout((<span class="function"><span class="keyword">function</span> (<span class="params">that</span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(that.a);</div><div class="line">    &#125;)(<span class="keyword">this</span>), <span class="number">100</span>);</div><div class="line">  &#125;</div><div class="line">  </div><div class="line"><span class="comment">// 方法 3</span></div><div class="line">  <span class="keyword">this</span>.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout((<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">    &#125;).call(<span class="keyword">this</span>), <span class="number">100</span>);</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>方法一是平时最常用，将异步执行的函数中的<code>this</code>替换成普通变量<code>that</code>，并提前将需要的运行环境赋值给<code>that</code>，这样就不存在异步函数中<code>this</code>指向不明确的问题了。<br>方法二和方法一类似，只是通过传参的方式，将需要的运行环境传入。<br>方法三则是通过<code>call</code>方法改变匿名函数的运行环境。</p>
+<p>有人会问直接运行下面代码，会导致什么现象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.a = <span class="number">1</span>;</div><div class="line">  <span class="keyword">this</span>.c = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Test();</div></pre></td></tr></table></figure></p>
+<p>主要弄清楚了前面说的<code>this</code>的指向问题，那么这就不存在什么困难了。这就是在全局的环境下执行<code>Test</code>函数，那么<code>this</code>指向的就是<code>window</code>。所以运行后的结果就是在<code>window</code>对象上绑定了<code>a</code>，<code>b</code>，<code>c</code>三个属性。</p>
+<p>有同学会对<code>testObj</code>的产生过程表示疑惑，<code>var testObj = new Test()</code>在我的理解用代码表示就是：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> _this = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">  _this.a = <span class="number">1</span>;</div><div class="line">  _this.c = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">  &#125;</div><div class="line">  _this.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> _this;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> testObj = Test();</div></pre></td></tr></table></figure></p>
+<h2 id="箭头函数中的this"><a href="#箭头函数中的this" class="headerlink" title="箭头函数中的this"></a>箭头函数中的this</h2><p>随着<code>ES6</code>的出现，给我们带来了很多特性。其中的箭头函数是其中一个比较重要的特性，极大的简化了我们的代码。并且很好的解决了函数中<code>this</code>的指向问题。<br>可以将下面的代码和上面同一部分的代码对比着看：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.a = <span class="number">1</span>;</div><div class="line">  <span class="keyword">this</span>.c = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> testObj = <span class="keyword">new</span> Test();</div><div class="line"></div><div class="line">testObj.c(); <span class="comment">// 1</span></div><div class="line">testObj.d(); <span class="comment">// 1</span></div></pre></td></tr></table></figure></p>
+<p>其中的改动就是把定时器中匿名函数改成了箭头函数，我们发现d方法的执行结果有了变化。这是因为箭头函数中的this执行的始终是定义这个函数时的上下文，不会随着执行的环境改变而改变。这个箭头函数是在testObj的环境下定义的，所以这里的this.a也就是内部属性a了。</p>
+<p>有人会对定义时的环境有点不太清楚<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.a = <span class="number">1</span>;</div><div class="line">  <span class="keyword">this</span>.c = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.d = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>); <span class="comment">// a处</span></div><div class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">// b处</span></div><div class="line">      <span class="built_in">console</span>.log(<span class="keyword">this</span>.a);</div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>其实箭头函数内的this（b处）和 d函数内部的this（a处）是一样的，而a处的this是根据d的运行环境确定的。</p>
+<p>所以就有了下面的运行结果：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">testObj.d.call(&#123;<span class="attr">a</span>: <span class="number">100</span>&#125;); <span class="comment">// 100</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/02/27/promise/">
+        <span class="next-text nav-default">Promise</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:15757165446@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">chendebo</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
